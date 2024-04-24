@@ -38,7 +38,7 @@ ip name-server 8.8.8.8
 ! ----------------------------------------------------------------------------------------------------------------------
 ip dhcp excluded-address 10.1.0.1
 ip dhcp pool LAN
- network 10.0.0.0 255.255.255.0
+ network 10.1.0.0 255.255.255.0
  default-router 10.1.0.1
  domain-name home.lan
  dns-server 10.1.0.1
