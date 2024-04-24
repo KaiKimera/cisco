@@ -25,11 +25,9 @@ ip dhcp pool LAN
 ! Interface.
 ! ----------------------------------------------------------------------------------------------------------------------
 interface FastEthernet0/0
- no shutdown
  ip address dhcp
  ip nat outside
 interface FastEthernet0/1
- no shutdown
  ip address 10.1.0.1 255.255.0.0
  ip nat inside
 ! ----------------------------------------------------------------------------------------------------------------------
