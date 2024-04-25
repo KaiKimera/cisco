@@ -93,9 +93,9 @@ line con 0
 line vty 0 4
   transport input telnet ssh
   password qwerty-vty
-  ! login local
+  login local
   ! Auto-login in configure mode:
-  privilege 15
+  privilege level 15
 line aux 0
   ! transport input none
   ! transport output none
