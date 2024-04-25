@@ -78,7 +78,7 @@ ip dhcp pool LAN
 ! INTERFACES.
 ! ----------------------------------------------------------------------------------------------------------------------
 interface FastEthernet 0/0
-  ip address 192.168.88.1 255.255.255.0
+  ip address dhcp
   ip nat outside
 interface FastEthernet 0/1
   ip address 10.1.0.1 255.255.0.0
