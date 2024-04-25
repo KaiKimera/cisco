@@ -15,6 +15,8 @@ service tcp-keepalives-out
 aaa new-model
 aaa authentication login default local
 !
+clock timezone UTC 3
+! clock update-calendar
 hostname gw1
 logging buffered 4096
 ip cef
@@ -92,16 +94,6 @@ interface FastEthernet0/1
   ip address 10.88.0.1 255.255.0.0
   ip nat inside
 ! ----------------------------------------------------------------------------------------------------------------------
-! TIME.
-! ----------------------------------------------------------------------------------------------------------------------
-clock timezone UTC 3
-! clock update-calendar
-ntp server 0.pool.ntp.org
-ntp server 1.pool.ntp.org
-ntp server 2.pool.ntp.org
-ntp server 3.pool.ntp.org
-ntp update-calendar
-! ----------------------------------------------------------------------------------------------------------------------
 ! NAT.
 ! ----------------------------------------------------------------------------------------------------------------------
 ip nat inside source list ACL_NAT interface FastEthernet0/0 overload
@@ -110,5 +102,10 @@ ip nat inside source list ACL_NAT interface FastEthernet0/0 overload
 ! ----------------------------------------------------------------------------------------------------------------------
 ip access-list standard ACL_NAT
   permit 10.88.0.0 0.0.255.255
+! ----------------------------------------------------------------------------------------------------------------------
+! NTP.
+! ----------------------------------------------------------------------------------------------------------------------
+ntp update-calendar
+ntp server 194.190.168.1
 !
 end
