@@ -89,12 +89,10 @@ interface FastEthernet 0/1
 ! ----------------------------------------------------------------------------------------------------------------------
 line con 0
   password qwerty-con
-  login local
   logging synchronous
 line vty 0 4
   transport input telnet ssh
   password qwerty-vty
-  login local
   ! Auto-login in configure mode:
   privilege level 15
 line aux 0
