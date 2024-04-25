@@ -20,7 +20,7 @@ clock timezone UTC 3
 hostname gw1
 logging buffered 4096
 ip cef
-ip domain name gw1.lan
+ip domain name home.lan
 ip multicast-routing
 !
 memory reserve critical 4096
