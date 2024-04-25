@@ -46,21 +46,28 @@ ip ssh version 2
 enable password qwerty-en
 username admin privilege 15 password qwerty-admin
 ! ----------------------------------------------------------------------------------------------------------------------
+! TERMINAL.
+! ----------------------------------------------------------------------------------------------------------------------
+line con 0
+  password qwerty-con
+  logging synchronous
+line vty 0 4
+  transport input telnet ssh
+  password qwerty-vty
+  ! Auto-login in configure mode:
+  privilege level 15
+line aux 0
+  ! transport input none
+  ! transport output none
+  ! no exec
+  ! exec-timeout 0 1
+  ! no password
+! ----------------------------------------------------------------------------------------------------------------------
 ! DNS.
 ! ----------------------------------------------------------------------------------------------------------------------
 ip dns server
 ip name-server 1.1.1.1
 ip name-server 8.8.8.8
-! ----------------------------------------------------------------------------------------------------------------------
-! TIME.
-! ----------------------------------------------------------------------------------------------------------------------
-clock timezone UTC 3
-! clock update-calendar
-ntp server 0.pool.ntp.org
-ntp server 1.pool.ntp.org
-ntp server 2.pool.ntp.org
-ntp server 3.pool.ntp.org
-ntp update-calendar
 ! ----------------------------------------------------------------------------------------------------------------------
 ! DHCP.
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -85,22 +92,15 @@ interface FastEthernet0/1
   ip address 10.1.0.1 255.255.0.0
   ip nat inside
 ! ----------------------------------------------------------------------------------------------------------------------
-! TERMINAL.
+! TIME.
 ! ----------------------------------------------------------------------------------------------------------------------
-line con 0
-  password qwerty-con
-  logging synchronous
-line vty 0 4
-  transport input telnet ssh
-  password qwerty-vty
-  ! Auto-login in configure mode:
-  privilege level 15
-line aux 0
-  ! transport input none
-  ! transport output none
-  ! no exec
-  ! exec-timeout 0 1
-  ! no password
+clock timezone UTC 3
+! clock update-calendar
+ntp server 0.pool.ntp.org
+ntp server 1.pool.ntp.org
+ntp server 2.pool.ntp.org
+ntp server 3.pool.ntp.org
+ntp update-calendar
 ! ----------------------------------------------------------------------------------------------------------------------
 ! NAT.
 ! ----------------------------------------------------------------------------------------------------------------------
