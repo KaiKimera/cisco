@@ -4,6 +4,8 @@
 service password-encryption
 service timestamps debug datetime msec localtime show-timezone
 service timestamps log datetime localtime show-timezone
+service tcp-keepalives-in
+service tcp-keepalives-out
 ! ----------------------------------------------------------------------------------------------------------------------
 ! GENERAL.
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -11,13 +13,23 @@ service timestamps log datetime localtime show-timezone
 ! Domain:   'gw1.lan'
 ! ----------------------------------------------------------------------------------------------------------------------
 aaa new-model
+aaa authentication login default local
+!
 hostname gw1
 logging buffered 4096
 ip cef
 ip domain name gw1.lan
-ip ssh time-out 60
-ip ssh version 2
 ip multicast-routing
+!
+memory reserve critical 4096
+memory reserve console 4096
+! ----------------------------------------------------------------------------------------------------------------------
+! SSH.
+! ----------------------------------------------------------------------------------------------------------------------
+ip ssh version 2
+ip ssh time-out 60
+ip ssh authentication-retries 3
+crypto key generate rsa modulus 2048
 ! ----------------------------------------------------------------------------------------------------------------------
 ! LOGIN.
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -29,8 +41,8 @@ login on-success log every 3
 ! ----------------------------------------------------------------------------------------------------------------------
 ! USERS AND PASSWORDS.
 ! ----------------------------------------------------------------------------------------------------------------------
-enable password qwerty
-username admin privilege 15 password qwerty
+enable password qwerty-en
+username admin privilege 15 password qwerty-admin
 ! ----------------------------------------------------------------------------------------------------------------------
 ! TIME.
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -74,10 +86,11 @@ interface FastEthernet0/1
 ! TERMINAL.
 ! ----------------------------------------------------------------------------------------------------------------------
 line con 0
- password qwerty
+ password qwerty-con
  logging synchronous
 line vty 0 4
- password qwerty
+ password qwerty-vty
+ privilege level 15
  transport input telnet ssh
 ! ----------------------------------------------------------------------------------------------------------------------
 ! ACL: NAT.
