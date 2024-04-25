@@ -22,7 +22,8 @@ ip domain-name gw1.lan
 ip multicast-routing
 !
 memory reserve critical 4096
-memory reserve console 4096
+! Not in v15.0:
+! memory reserve console 512
 ! ----------------------------------------------------------------------------------------------------------------------
 ! SSH.
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -34,11 +35,11 @@ ip ssh version 2
 ! ----------------------------------------------------------------------------------------------------------------------
 ! LOGIN.
 ! ----------------------------------------------------------------------------------------------------------------------
-login block-for 60 attempts 3 within 10
-login delay 5
-login quiet-mode access-class 10
-login on-failure log every 5
-login on-success log every 3
+! login block-for 60 attempts 3 within 10
+! login delay 5
+! login quiet-mode access-class 10
+! login on-failure log every 5
+! login on-success log every 3
 ! ----------------------------------------------------------------------------------------------------------------------
 ! USERS AND PASSWORDS.
 ! ----------------------------------------------------------------------------------------------------------------------
@@ -48,7 +49,7 @@ username admin privilege 15 password qwerty-admin
 ! TIME.
 ! ----------------------------------------------------------------------------------------------------------------------
 clock timezone UTC 3
-clock update-calendar
+! clock update-calendar
 ntp update-calendar
 ntp server 0.pool.ntp.org
 ntp server 1.pool.ntp.org
